@@ -43,7 +43,8 @@ export default abstract class AbstractResponse {
             if (err) {
                 throw err;
             }
-            this._xml = xmlObject;
+            const xmlObjectJSON = JSON.parse(JSON.stringify(xmlObject));
+            this._xml = xmlObjectJSON;
 
             if (!this.xml.hasOwnProperty("response")) {
                 throw new IntacctException("Response XML is missing root response element");

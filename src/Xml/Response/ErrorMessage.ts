@@ -31,8 +31,9 @@ export default class ErrorMessage {
 
     constructor(errorMessages: object) {
         const errorContents = [];
-        if (errorMessages.hasOwnProperty("error")) {
-            const errors = errorMessages["error"];
+        const errorMessagesJSON = JSON.parse(JSON.stringify(errorMessages));
+        if (errorMessagesJSON.hasOwnProperty("error")) {
+            const errors = errorMessagesJSON["error"];
             if (Array.isArray(errors)) {
                 for (const index in errors) {
                     if (errors.hasOwnProperty(index)) {
@@ -41,7 +42,7 @@ export default class ErrorMessage {
                         errorContents.push(pieces.join(" "));
                     }
                 }
-            } else if (errorMessages instanceof Object) {
+            } else if (errorMessagesJSON instanceof Object) {
                 const pieces = this.combineErrorMessageElements(errors);
                 errorContents.push(pieces.join(" "));
             }
